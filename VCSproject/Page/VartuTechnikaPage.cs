@@ -11,14 +11,12 @@ namespace AutoTestProject.Page
 {
     public class VartuTechnikaPage : BasePage
     {
-        private static IWebDriver _driver;
-
-        private IWebElement _doorsWidth => _driver.FindElement(By.Id("doors_width"));
-        private IWebElement _doorsHeight => _driver.FindElement(By.Id("doors_height"));
-        private IWebElement _automaticDoorsCheckBox => _driver.FindElement(By.Id("automatika"));
-        private IWebElement _withWorkCheckBox => _driver.FindElement(By.Id("darbai"));
-        private IWebElement _calculateButton => _driver.FindElement(By.Id("calc_submit"));
-        private IWebElement _resultText => _driver.FindElement(By.CssSelector("#calc_result > div"));
+        private IWebElement _doorsWidth => Driver.FindElement(By.Id("doors_width"));
+        private IWebElement _doorsHeight => Driver.FindElement(By.Id("doors_height"));
+        private IWebElement _automaticDoorsCheckBox => Driver.FindElement(By.Id("automatika"));
+        private IWebElement _withWorkCheckBox => Driver.FindElement(By.Id("darbai"));
+        private IWebElement _calculateButton => Driver.FindElement(By.Id("calc_submit"));
+        private IWebElement _resultText => Driver.FindElement(By.CssSelector("#calc_result > div"));
 
         public VartuTechnikaPage(IWebDriver webdriver) : base(webdriver) { }
 
@@ -52,7 +50,7 @@ namespace AutoTestProject.Page
 
         public VartuTechnikaPage SelectWithWorkCheckbox(bool work)
         {
-            if(work != _withWorkCheckBox.Selected)
+            if (work != _withWorkCheckBox.Selected)
                 _withWorkCheckBox.Click();
             return this;
         }
@@ -71,7 +69,7 @@ namespace AutoTestProject.Page
 
         private VartuTechnikaPage WaitForResult()
         {
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
             wait.Until(d => _resultText.Displayed);
             return this;
         }
